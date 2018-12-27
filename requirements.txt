@@ -50,3 +50,5 @@ phonenumbers
 jpype1
 hl7
 pysftp
+spyne
+
