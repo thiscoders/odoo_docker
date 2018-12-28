@@ -50,4 +50,7 @@ phonenumbers
 jpype1
 hl7
 pysftp
-
+sqlalchemy
+pyodbc
+cx_Oracle
+pymssql
