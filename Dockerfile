@@ -45,8 +45,11 @@ RUN pip3 install -r /opt/piplist/requirements.txt -i https://pypi.douban.com/sim
 
 RUN set -x; \
 	rm -rf /usr/local/lib/python3.7/site-packages/pyreportjasper/jasperstarter/lib/jasperstarter.jar \
+	&& rm -rf /usr/local/lib/python3.7/site-packages/pyreportjasper/jasperstarter/bin/jasperstarter  \
 	&& wget -P /usr/local/lib/python3.7/site-packages/pyreportjasper/jasperstarter/lib/ http://www.liuye-cloud.top:18080/jasperstarter.jar \
-	&& wget -P /usr/local/lib/python3.7/site-packages/pyreportjasper/jasperstarter/lib/ http://www.liuye-cloud.top:18080/chinesejasperfont.jar
+	&& wget -P /usr/local/lib/python3.7/site-packages/pyreportjasper/jasperstarter/lib/ http://www.liuye-cloud.top:18080/chinesejasperfont.jar \
+	&& wget -P /usr/local/lib/python3.7/site-packages/pyreportjasper/jasperstarter/bin/ http://www.liuye-cloud.top:18080/jasperstarter \
+	&& chmod 755 /usr/local/lib/python3.7/site-packages/pyreportjasper/jasperstarter/bin/jasperstarter
 
 EXPOSE 8069 8072
 
