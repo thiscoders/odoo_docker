@@ -28,6 +28,7 @@ RUN	set -x; \
 		default-jdk \
 		tree \
 		vim \
+		htop \
 		fontconfig \
 		fontconfig-config \
 		fonts-dejavu-core \
