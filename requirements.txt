@@ -54,3 +54,4 @@ sqlalchemy
 pyodbc
 cx_Oracle
 pymssql
+pysnooper
