@@ -10,7 +10,7 @@ COPY ./requirements.txt /opt/piplist/requirements.txt
 
 RUN groupadd -r odoo && useradd -rm -g odoo odoo
 
-RUN	set -x; \
+RUN set -x; \
 	wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - \  
 	&& apt update \
 	&& DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends \
@@ -41,7 +41,9 @@ RUN	set -x; \
 	&& cp wkhtmltox/bin/* /usr/local/bin/ \
 	&& cp -r wkhtmltox/share/man/man1 /usr/local/share/man/
 
-RUN pip3 install -r /opt/piplist/requirements.txt -i https://pypi.douban.com/simple --trusted-host=pypi.douban.com \
+RUN set -x; \
+	pip install --upgrade pip \
+	&& pip3 install -r /opt/piplist/requirements.txt -i https://pypi.douban.com/simple --trusted-host=pypi.douban.com \
 	&& rm -rf /opt/piplist
 
 RUN set -x; \
