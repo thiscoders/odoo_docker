@@ -1,4 +1,4 @@
-FROM python:latest
+FROM python:3.7.3
 MAINTAINER liuye <ye.liu01@hand-china.com>
 
 ENV LANG C.UTF-8
@@ -50,9 +50,9 @@ RUN set -x; \
 RUN set -x; \
     rm -rf /usr/local/lib/python3.7/site-packages/pyreportjasper/jasperstarter/lib/jasperstarter.jar \
     && rm -rf /usr/local/lib/python3.7/site-packages/pyreportjasper/jasperstarter/bin/jasperstarter  \
-    && wget -P /usr/local/lib/python3.7/site-packages/pyreportjasper/jasperstarter/lib/ http://www.liuye-cloud.top:18080/jasperstarter.jar \
-    && wget -P /usr/local/lib/python3.7/site-packages/pyreportjasper/jasperstarter/lib/ http://www.liuye-cloud.top:18080/chinesejasperfont.jar \
-    && wget -P /usr/local/lib/python3.7/site-packages/pyreportjasper/jasperstarter/bin/ http://www.liuye-cloud.top:18080/jasperstarter \
+    && wget -P /usr/local/lib/python3.7/site-packages/pyreportjasper/jasperstarter/lib/ https://www.liuye-cloud.top/jasperstarter.jar \
+    && wget -P /usr/local/lib/python3.7/site-packages/pyreportjasper/jasperstarter/lib/ https://www.liuye-cloud.top/chinesejasperfont.jar \
+    && wget -P /usr/local/lib/python3.7/site-packages/pyreportjasper/jasperstarter/bin/ https://www.liuye-cloud.top/jasperstarter \
     && chmod 755 /usr/local/lib/python3.7/site-packages/pyreportjasper/jasperstarter/bin/jasperstarter
 
 # modify time zone
