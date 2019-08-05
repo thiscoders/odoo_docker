@@ -49,10 +49,14 @@ pyreportjasper
 phonenumbers
 jpype1
 hl7
-pysftp
 sqlalchemy
 pyodbc
 cx_Oracle
 pymssql
 pysnooper
 jieba
+boto
+rotate_backups_s3
+pysftp
+oauthlib
+simplejson

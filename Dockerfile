@@ -8,57 +8,31 @@ USER root
 COPY ./sources.list /etc/apt/sources.list
 COPY ./requirements.txt /opt/piplist/requirements.txt
 
-RUN groupadd -r odoo && useradd -rm -g odoo odoo
-
 RUN set -x; \
 	wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - \  
 	&& apt update \
 	&& DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends \
-        ca-certificates \
-        curl \
-        node-less \
-        python3-pip \
-        python3-setuptools \
-        python3-renderpm \
-        libssl1.0-dev \
-        xz-utils \
-        python3-watchdog \
-        unixodbc-dev \
-        postgresql-client-10 \
-        default-jdk \
-        tree \
-        vim \
-        htop \
-        fontconfig \
-        fontconfig-config \
-        fonts-dejavu-core \
-        fonts-wqy-zenhei \
+        ca-certificates curl node-less python3-pip python3-setuptools python3-renderpm libssl1.0-dev xz-utils python3-watchdog unixodbc-dev \
+        postgresql-client-10 default-jdk tree vim htop fontconfig fontconfig-config fonts-dejavu-core fonts-wqy-zenhei \
         python3-dev python2.7-dev libldap2-dev libsasl2-dev slapd ldap-utils python-tox lcov valgrind \
     && curl -o wkhtmltox.tar.xz -SL https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz \
     && echo '3f923f425d345940089e44c1466f6408b9619562 wkhtmltox.tar.xz' | sha1sum -c - \
     && tar xvf wkhtmltox.tar.xz \
     && cp wkhtmltox/lib/* /usr/local/lib/ \
     && cp wkhtmltox/bin/* /usr/local/bin/ \
-    && cp -r wkhtmltox/share/man/man1 /usr/local/share/man/
-
-# install python pip package
-RUN set -x; \
-    pip install --upgrade pip \
+    && cp -r wkhtmltox/share/man/man1 /usr/local/share/man/ \
+    && pip install --upgrade pip \
     && pip3 install -r /opt/piplist/requirements.txt -i https://pypi.douban.com/simple --trusted-host=pypi.douban.com \
-    && rm -rf /opt/piplist
-
-RUN set -x; \
-    rm -rf /usr/local/lib/python3.7/site-packages/pyreportjasper/jasperstarter/lib/jasperstarter.jar \
+    && rm -rf /opt/piplist \
+    && rm -rf /usr/local/lib/python3.7/site-packages/pyreportjasper/jasperstarter/lib/jasperstarter.jar \
     && rm -rf /usr/local/lib/python3.7/site-packages/pyreportjasper/jasperstarter/bin/jasperstarter  \
     && wget -P /usr/local/lib/python3.7/site-packages/pyreportjasper/jasperstarter/lib/ https://www.liuye-cloud.top/jasperstarter.jar \
     && wget -P /usr/local/lib/python3.7/site-packages/pyreportjasper/jasperstarter/lib/ https://www.liuye-cloud.top/chinesejasperfont.jar \
     && wget -P /usr/local/lib/python3.7/site-packages/pyreportjasper/jasperstarter/bin/ https://www.liuye-cloud.top/jasperstarter \
-    && chmod 755 /usr/local/lib/python3.7/site-packages/pyreportjasper/jasperstarter/bin/jasperstarter
-
-# modify time zone
-RUN set -x; \
-    ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
-    && echo "Asia/Shanghai" > /etc/timezone
+    && chmod 755 /usr/local/lib/python3.7/site-packages/pyreportjasper/jasperstarter/bin/jasperstarter \
+    && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+    && echo "Asia/Shanghai" > /etc/timezone \
+    && groupadd -r odoo && useradd -rm -g odoo odoo
 
 EXPOSE 8069 8072
 
