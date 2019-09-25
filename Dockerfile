@@ -21,7 +21,7 @@ RUN set -x; \
     && cp wkhtmltox/lib/* /usr/local/lib/ \
     && cp wkhtmltox/bin/* /usr/local/bin/ \
     && cp -r wkhtmltox/share/man/man1 /usr/local/share/man/ \
-    && pip install --upgrade pip \
+    && pip install --upgrade pip -i https://pypi.douban.com/simple --trusted-host=pypi.douban.com \
     && pip3 install -r /opt/piplist/requirements.txt -i https://pypi.douban.com/simple --trusted-host=pypi.douban.com \
     && rm -rf /opt/piplist \
     && rm -rf /usr/local/lib/python3.7/site-packages/pyreportjasper/jasperstarter/lib/jasperstarter.jar \
