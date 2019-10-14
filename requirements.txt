@@ -61,3 +61,4 @@ rotate-backups-s3==0.3
 pysftp==0.2.9
 oauthlib==3.0.2
 simplejson==3.16.0
+dict2xml==1.6.1
