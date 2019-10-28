@@ -44,11 +44,14 @@ RUN set -x; \
 # set oracle_home env
 ENV ORACLE_HOME /opt/oracle/instantclient_12_2
 
+# create odoo group and user
+RUN set -x; \
+    groupadd -r odoo && useradd -rm -g odoo odoo
+
 # modify timezone
 RUN set -x; \
     ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
-    && echo "Asia/Shanghai" > /etc/timezone \
-    && groupadd -r odoo && useradd -rm -g odoo odoo
+    && echo "Asia/Shanghai" > /etc/timezone
 
 EXPOSE 8069 8072
 
