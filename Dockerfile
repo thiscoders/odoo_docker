@@ -53,6 +53,8 @@ RUN set -x; \
     ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone
 
+# export server port
 EXPOSE 8069 8072
 
+# switch user to odoo
 USER odoo

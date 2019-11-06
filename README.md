@@ -1,1 +1,1 @@
-# Odoo12 镜像
+# Odoo12 PRC 镜像
