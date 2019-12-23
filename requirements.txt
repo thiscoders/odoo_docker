@@ -52,5 +52,4 @@ pysftp
 oauthlib
 simplejson
 sphinx==1.2.3
-mercurial==3.2.2
 sphinx-patchqueue==0.4.0
