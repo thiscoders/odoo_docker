@@ -63,6 +63,7 @@ RUN set -x; \
         pip install --upgrade pip \
         && pip3 install -r /opt/piplist/requirements.txt -i https://pypi.douban.com/simple --trusted-host=pypi.douban.com \
         && rm -rf /opt/piplist \
+        && apt autoremove \
         && groupadd -r odoo && useradd -rm -g odoo odoo
 
 EXPOSE 8069 8071 8072
