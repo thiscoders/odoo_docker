@@ -9,8 +9,8 @@ COPY ./requirements.txt /opt/piplist/requirements.txt
 
 # Install some deps, lessc and less-plugin-clean-css, and wkhtmltopdf
 RUN set -x; \
-        apt-get update \
-        && apt-get install -y --no-install-recommends \
+        apt update \
+        && apt install -y --no-install-recommends \
             ca-certificates \
             busybox \
             curl \
@@ -19,7 +19,6 @@ RUN set -x; \
             gnupg \
             libssl-dev \
             node-less \
-            npm \
             python3-pip \
             python3-pyldap \
             python3-qrcode \
@@ -36,21 +35,27 @@ RUN set -x; \
             libldap2-dev \
         && curl -o wkhtmltox.deb -sSL https://www.liuye-cloud.top/wkhtmltox_0.12.5-1.stretch_amd64.deb \
         && echo '7e35a63f9db14f93ec7feeb0fce76b30c08f2057 wkhtmltox.deb' | sha1sum -c - \
-        && apt-get install -y --no-install-recommends ./wkhtmltox.deb \
-        && rm -rf /var/lib/apt/lists/* wkhtmltox.deb \
+        && apt install -y --no-install-recommends ./wkhtmltox.deb \
+        && rm -rf /var/lib/apt/lists/* wkhtmltox.deb
+
+# Install nodejs
+RUN set -x; \
+        apt update \
+        && curl -sL https://deb.nodesource.com/setup_lts.x | bash - \
+        && apt install -y nodejs \
         && npm install -g rtlcss
 
 # install latest postgresql-client
 RUN set -x; \
-        echo 'deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main' > etc/apt/sources.list.d/pgdg.list \
+        echo 'deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main' > /etc/apt/sources.list.d/pgdg.list \
         && export GNUPGHOME="$(mktemp -d)" \
         && repokey='B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8' \
         && gpg --batch --keyserver keyserver.ubuntu.com --recv-keys "${repokey}" \
         && gpg --batch --armor --export "${repokey}" > /etc/apt/trusted.gpg.d/pgdg.gpg.asc \
         && gpgconf --kill all \
         && rm -rf "$GNUPGHOME" \
-        && apt-get update  \
-        && apt-get install -y postgresql-client-12 \
+        && apt update  \
+        && apt install -y --no-install-recommends postgresql-client \
         && rm -rf /var/lib/apt/lists/*
 
 # install Python pip and create odoo user
