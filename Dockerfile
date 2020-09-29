@@ -1,5 +1,5 @@
-FROM python:3.7
-MAINTAINER liuye <ye.liu01@hand-china.com>
+FROM python:3.7.3
+MAINTAINER liuye <1621963477@qq.com>
 
 ENV LANG C.UTF-8
 
@@ -12,6 +12,7 @@ RUN set -x; \
         apt-get update \
         && apt-get install -y --no-install-recommends \
             ca-certificates \
+            busybox \
             curl \
             dirmngr \
             fonts-noto-cjk \
@@ -24,9 +25,13 @@ RUN set -x; \
             python3-qrcode \
             python3-renderpm \
             python3-setuptools \
+            python3-slugify \
             python3-vobject \
             python3-watchdog \
             xz-utils \
+            python3-dev \
+            libxml2-dev \
+            libxslt1-dev \
             libsasl2-dev \
             libldap2-dev \
         && curl -o wkhtmltox.deb -sSL https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.stretch_amd64.deb \
@@ -45,7 +50,7 @@ RUN set -x; \
         && gpgconf --kill all \
         && rm -rf "$GNUPGHOME" \
         && apt-get update  \
-        && apt-get install -y postgresql-client \
+        && apt-get install -y postgresql-client-12 \
         && rm -rf /var/lib/apt/lists/*
 
 # install Python pip and create odoo user
@@ -55,7 +60,7 @@ RUN set -x; \
         && rm -rf /opt/piplist \
         && groupadd -r odoo && useradd -rm -g odoo odoo
 
-EXPOSE 8069 8072
+EXPOSE 8069 8071 8072
 
 # set default user
 USER odoo
