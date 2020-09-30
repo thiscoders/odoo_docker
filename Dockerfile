@@ -5,6 +5,7 @@ ENV LANG C.UTF-8
 
 USER root
 
+COPY ./sources.list /etc/apt/sources.list
 COPY ./requirements.txt /opt/piplist/requirements.txt
 
 # Install some deps, lessc and less-plugin-clean-css, and wkhtmltopdf
