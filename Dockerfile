@@ -32,7 +32,7 @@ RUN set -x; \
     && dpkg -i ibmmq-client_9.2.0.0_amd64.deb \
     && dpkg -i ibmmq-sdk_9.2.0.0_amd64.deb \
     && cd .. \
-    && rm -f MQClient.tar.gz MQClient
+    && rm -rf MQClient.tar.gz MQClient
 
 ENV LD_LIBRARY_PATH /opt/mqm/lib64
 
