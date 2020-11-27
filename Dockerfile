@@ -16,14 +16,14 @@ RUN set -x; \
         ca-certificates curl node-less python3-pip python3-setuptools python3-renderpm libssl1.0-dev xz-utils python3-watchdog unixodbc-dev \
         postgresql-client default-jdk tree vim htop fontconfig fontconfig-config fonts-dejavu-core fonts-wqy-zenhei \
         python3-dev python2.7-dev libldap2-dev libsasl2-dev slapd ldap-utils python-tox lcov valgrind libaio1 \
-    && curl -o wkhtmltox.deb -sSL https://www.liuye-cloud.top/wkhtmltox_0.12.5-1.stretch_amd64.deb \
+    && curl -o wkhtmltox.deb -sSL https://repo.rocketx.top/docker/wkhtmltox_0.12.5-1.stretch_amd64.deb \
     && echo '7e35a63f9db14f93ec7feeb0fce76b30c08f2057 wkhtmltox.deb' | sha1sum -c - \
     && apt-get install -y --no-install-recommends ./wkhtmltox.deb \
     && rm -rf /var/lib/apt/lists/* wkhtmltox.deb
 
 # install ibm mq client
 RUN set -x; \
-    curl -o MQClient.tar.gz -sSL https://www.rocketx.top/MQClient.tar.gz \ 
+    curl -o MQClient.tar.gz -sSL https://repo.rocketx.top/docker/MQClient.tar.gz \ 
     && tar -zxf MQClient.tar.gz \
     && cd MQClient \
     && bash mqlicense.sh -accept \
@@ -43,14 +43,14 @@ RUN set -x; \
     && rm -rf /opt/piplist \
     && rm -rf /usr/local/lib/python3.7/site-packages/pyreportjasper/jasperstarter/lib/jasperstarter.jar \
     && rm -rf /usr/local/lib/python3.7/site-packages/pyreportjasper/jasperstarter/bin/jasperstarter  \
-    && wget -P /usr/local/lib/python3.7/site-packages/pyreportjasper/jasperstarter/lib/ https://www.liuye-cloud.top/jasperstarter.jar \
-    && wget -P /usr/local/lib/python3.7/site-packages/pyreportjasper/jasperstarter/lib/ https://www.liuye-cloud.top/chinesejasperfont.jar \
-    && wget -P /usr/local/lib/python3.7/site-packages/pyreportjasper/jasperstarter/bin/ https://www.liuye-cloud.top/jasperstarter \
+    && curl -o /usr/local/lib/python3.7/site-packages/pyreportjasper/jasperstarter/lib/jasperstarter.jar -sSL https://repo.rocketx.top/docker/jasperstarter.jar \
+    && curl -o /usr/local/lib/python3.7/site-packages/pyreportjasper/jasperstarter/lib/chinesejasperfont.jar -sSL https://repo.rocketx.top/docker/chinesejasperfont.jar \
+    && curl -o /usr/local/lib/python3.7/site-packages/pyreportjasper/jasperstarter/bin/jasperstarter -sSL https://repo.rocketx.top/docker/jasperstarter \
     && chmod 755 /usr/local/lib/python3.7/site-packages/pyreportjasper/jasperstarter/bin/jasperstarter 
 
 # install oracle client
 RUN set -x; \
-    curl -o instantclient.zip -sSL https://www.liuye-cloud.top/instantclient-basic-linux.x64-12.2.0.1.0.zip \ 
+    curl -o instantclient.zip -sSL https://repo.rocketx.top/docker/instantclient-basic-linux.x64-12.2.0.1.0.zip \ 
     && unzip instantclient.zip -d  /opt/oracle \
     && sh -c "echo /opt/oracle/instantclient_12_2 > /etc/ld.so.conf.d/oracle-instantclient.conf" \
     && ldconfig \
@@ -61,7 +61,8 @@ ENV ORACLE_HOME /opt/oracle/instantclient_12_2
 
 # create odoo group and user
 RUN set -x; \
-    groupadd -r odoo && useradd -rm -g odoo odoo
+    groupadd -r odoo \
+    && useradd -rm -g odoo odoo
 
 # modify timezone
 RUN set -x; \
