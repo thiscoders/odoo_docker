@@ -46,11 +46,11 @@ XlsxWriter==0.9.3
 xlwt==1.3.*
 xlrd==1.0.0
 pypiwin32 ; sys_platform == 'win32'
-phonenumbers
-boto
-rotate_backups_s3
-pysftp
-oauthlib
-simplejson
+phonenumbers==8.10.15
+boto==2.49.0
+rotate-backups-s3==0.3
+pysftp==0.2.9
+oauthlib==3.0.2
+simplejson==3.16.0
 sphinx==1.2.3
 sphinx-patchqueue==0.4.0
