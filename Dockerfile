@@ -1,5 +1,5 @@
 FROM python:3.7.3
-MAINTAINER liuye <1621963477@qq.com>
+LABEL maintainer="liuye <1621963477@qq.com>"
 
 ENV LANG C.UTF-8
 
