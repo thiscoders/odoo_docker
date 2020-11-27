@@ -3,8 +3,8 @@ MAINTAINER liuye <ye.liu01@hand-china.com>
 
 ENV LANG C.UTF-8
 
-COPY ./sources.list /etc/apt/sources.list
 COPY ./requirements.txt /opt/piplist/requirements.txt
+COPY ./README.md /README.md
 
 RUN groupadd -r odoo && useradd -rm -g odoo odoo
 
@@ -14,7 +14,6 @@ RUN set -x; \
 	&& DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends \
 		ca-certificates \
 		unixodbc-dev \
-		libssl1.0-dev \
 		postgresql-client-9.5 \
 		default-jdk \
 		tree \
@@ -30,7 +29,7 @@ RUN set -x; \
 		python-pip \
 		python-renderpm \
 		python-watchdog \
-		python3-dev python2.7-dev libldap2-dev libsasl2-dev slapd ldap-utils python-tox lcov valgrind \
+		python2.7-dev libldap2-dev libsasl2-dev slapd ldap-utils python-tox lcov valgrind \
 	&& curl -o wkhtmltox.tar.xz -SL https://repo.rocketx.top/docker/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz \
 	&& echo '3f923f425d345940089e44c1466f6408b9619562 wkhtmltox.tar.xz' | sha1sum -c - \
 	&& tar xvf wkhtmltox.tar.xz \
