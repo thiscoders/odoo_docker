@@ -21,6 +21,8 @@ RUN set -x; \
         libssl-dev \
         node-less \
         npm \
+        libsasl2-dev \
+        libldap2-dev \
         python3-num2words \
         python3-pdfminer \
         python3-pip \
