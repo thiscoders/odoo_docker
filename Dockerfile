@@ -7,6 +7,7 @@ USER root
 
 COPY ./sources.list /etc/apt/sources.list
 COPY ./requirements.txt /opt/piplist/requirements.txt
+COPY ./README.md /README.md
 
 # Install some deps, lessc and less-plugin-clean-css, and wkhtmltopdf
 RUN apt-get update && \
@@ -33,7 +34,7 @@ RUN apt-get update && \
         python3-xlrd \
         python3-xlwt \
         xz-utils \
-    && curl -o wkhtmltox.deb -sSL https://www.liuye-cloud.top/wkhtmltox_0.12.5-1.buster_amd64.deb \
+    && curl -o wkhtmltox.deb -sSL https://repo.rocketx.top/docker/wkhtmltox_0.12.5-1.buster_amd64.deb \
     && echo 'ea8277df4297afc507c61122f3c349af142f31e5 wkhtmltox.deb' | sha1sum -c - \
     && apt-get install -y --no-install-recommends ./wkhtmltox.deb \
     && rm -rf /var/lib/apt/lists/* wkhtmltox.deb
