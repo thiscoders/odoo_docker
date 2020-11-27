@@ -1,4 +1,4 @@
-FROM python:3.7.3
+FROM python:3.7.9
 LABEL maintainer="liuye <1621963477@qq.com>"
 
 ENV LANG C.UTF-8
