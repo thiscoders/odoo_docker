@@ -10,8 +10,9 @@ COPY ./requirements.txt /opt/piplist/requirements.txt
 COPY ./README.md /README.md
 
 # Install some deps, lessc and less-plugin-clean-css, and wkhtmltopdf
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
+RUN set -x; \
+    apt update \
+    && apt install -y --no-install-recommends \
         ca-certificates \
         curl \
         dirmngr \
@@ -41,10 +42,10 @@ RUN apt-get update && \
 
 # Install nodejs
 RUN set -x; \
-        apt update \
-        && curl -sL https://deb.nodesource.com/setup_lts.x | bash - \
-        && apt install -y nodejs \
-        && npm install -g rtlcss
+    apt update \
+    && curl -sL https://deb.nodesource.com/setup_lts.x | bash - \
+    && apt install -y nodejs \
+    && npm install -g rtlcss
 
 # install latest postgresql-client
 RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main' > /etc/apt/sources.list.d/pgdg.list \
