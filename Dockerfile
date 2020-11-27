@@ -7,6 +7,7 @@ USER root
 
 COPY ./sources.list /etc/apt/sources.list
 COPY ./requirements.txt /opt/piplist/requirements.txt
+COPY ./README.md /README.md
 
 # install common tools
 RUN set -x; \
