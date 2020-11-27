@@ -7,6 +7,7 @@ USER root
 
 COPY ./sources.list /etc/apt/sources.list
 COPY ./requirements.txt /opt/piplist/requirements.txt
+COPY ./README.md /README.md
 
 # Install some deps, lessc and less-plugin-clean-css, and wkhtmltopdf
 RUN set -x; \
@@ -34,7 +35,7 @@ RUN set -x; \
             libxslt1-dev \
             libsasl2-dev \
             libldap2-dev \
-        && curl -o wkhtmltox.deb -sSL https://www.liuye-cloud.top/wkhtmltox_0.12.5-1.stretch_amd64.deb \
+        && curl -o wkhtmltox.deb -sSL https://repo.rocketx.top/docker/wkhtmltox_0.12.5-1.stretch_amd64.deb \
         && echo '7e35a63f9db14f93ec7feeb0fce76b30c08f2057 wkhtmltox.deb' | sha1sum -c - \
         && apt install -y --no-install-recommends ./wkhtmltox.deb \
         && rm -rf /var/lib/apt/lists/* wkhtmltox.deb
