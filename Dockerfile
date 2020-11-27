@@ -5,6 +5,8 @@ ENV LANG C.UTF-8
 
 USER root
 
+COPY ./README.md /README.md
+
 # get interpreter
 RUN set -x; \
     mv /usr/local/bin/python3.7 /root/python3.7.bck \
