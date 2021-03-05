@@ -79,4 +79,3 @@ docxtpl==0.9.2
 tornado==6.0.4
 docxcompose==1.2.0
 pika==1.1.0
-pymqi==1.12.0
