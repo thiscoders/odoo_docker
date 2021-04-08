@@ -63,7 +63,6 @@ property-manager==3.0
 psutil==4.3.1
 psycopg2==2.7.3.1
 pycparser==2.20
-pycrypto==2.6.1
 pycryptodome==3.9.9
 pydot==1.2.3
 pyldap==2.4.28
