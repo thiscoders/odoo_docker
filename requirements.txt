@@ -45,8 +45,8 @@ XlsxWriter==0.9.6
 cffi==1.10.0
 chardet==2.1.1
 colorama==0.2.5
-cryptography==1.4
-cx-Oracle==5.2.1
+cryptography==3.3.2
+cx_Oracle==7.3
 enum34==1.1.6
 html5lib==0.999
 idna==2.5

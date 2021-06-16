@@ -35,19 +35,8 @@ RUN set -x; \
 	&& cp wkhtmltox/bin/* /usr/local/bin/ \
 	&& cp -r wkhtmltox/share/man/man1 /usr/local/share/man/ 
 
-# install oracle client
-RUN set -x; \
-    curl -o instantclient.zip -sSL https://repo.rocketx.top/docker/instantclient-basic-linux.x64-12.2.0.1.0.zip \ 
-    && unzip instantclient.zip -d  /opt/oracle \
-    && sh -c "echo /opt/oracle/instantclient_12_2 > /etc/ld.so.conf.d/oracle-instantclient.conf" \
-    && ldconfig \
-    && rm -f instantclient.zip
-
-# set oracle_home env
-ENV ORACLE_HOME /opt/oracle/instantclient_12_2
-
-RUN pip install --upgrade pip \
-	&& pip install -r /opt/piplist/requirements.txt -i https://pypi.douban.com/simple --trusted-host=pypi.douban.com \
+RUN pip install --upgrade pip -i https://pypi.tuna.tsinghua.edu.cn/simple \
+	&& pip install -r /opt/piplist/requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple \
 	&& rm -rf /opt/piplist \
 	&& rm -rf /var/lib/apt/lists/*
 
