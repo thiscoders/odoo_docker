@@ -1,13 +1,10 @@
 FROM python:2.7.15
-MAINTAINER liuye <ye.liu01@hand-china.com>
-
+LABEL maintainer="liuye <ye.liu01@hand-china.com>"
 ENV LANG C.UTF-8
 
 COPY ./sources.list /etc/apt/sources.list
 COPY ./requirements.txt /opt/piplist/requirements.txt
 COPY ./README.md /README.md
-
-RUN groupadd -r odoo && useradd -rm -g odoo odoo
 
 RUN set -x; \
 	wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - \
@@ -38,11 +35,27 @@ RUN set -x; \
 	&& cp wkhtmltox/bin/* /usr/local/bin/ \
 	&& cp -r wkhtmltox/share/man/man1 /usr/local/share/man/ 
 
+# install oracle client
+RUN set -x; \
+    curl -o instantclient.zip -sSL https://repo.rocketx.top/docker/instantclient-basic-linux.x64-12.2.0.1.0.zip \ 
+    && unzip instantclient.zip -d  /opt/oracle \
+    && sh -c "echo /opt/oracle/instantclient_12_2 > /etc/ld.so.conf.d/oracle-instantclient.conf" \
+    && ldconfig \
+    && rm -f instantclient.zip
+
+# set oracle_home env
+ENV ORACLE_HOME /opt/oracle/instantclient_12_2
+
 RUN pip install --upgrade pip \
 	&& pip install -r /opt/piplist/requirements.txt -i https://pypi.douban.com/simple --trusted-host=pypi.douban.com \
 	&& rm -rf /opt/piplist \
 	&& rm -rf /var/lib/apt/lists/*
 
 EXPOSE 8069 8072
+
+# create odoo group and user
+RUN set -x; \
+    groupadd -r odoo \
+    && useradd -rm -g odoo odoo
 
 USER odoo
