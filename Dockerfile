@@ -3,6 +3,7 @@ MAINTAINER liuye <ye.liu01@hand-china.com>
 
 ENV LANG C.UTF-8
 
+COPY ./sources.list /etc/apt/sources.list
 COPY ./requirements.txt /opt/piplist/requirements.txt
 COPY ./README.md /README.md
 
