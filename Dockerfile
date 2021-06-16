@@ -1,4 +1,4 @@
-FROM python:2.7
+FROM python:2.7.15
 MAINTAINER liuye <ye.liu01@hand-china.com>
 
 ENV LANG C.UTF-8
