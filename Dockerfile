@@ -1,4 +1,4 @@
-FROM python:2.7.6
+FROM python:2.7.15
 LABEL maintainer="liuye <ye.liu01@hand-china.com>"
 ENV LANG C.UTF-8
 
@@ -39,13 +39,7 @@ RUN set -x; \
 	pip install --upgrade pip -i https://pypi.tuna.tsinghua.edu.cn/simple \
 	&& pip install -r /opt/piplist/requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple \
 	&& rm -rf /opt/piplist \
-	&& rm -rf /var/lib/apt/lists/* \
-	&& rm -rf /usr/local/lib/python2.7/site-packages/pyreportjasper/jasperstarter/lib/jasperstarter.jar \
-    && rm -rf /usr/local/lib/python2.7/site-packages/pyreportjasper/jasperstarter/bin/jasperstarter  \
-    && curl -o /usr/local/lib/python2.7/site-packages/pyreportjasper/jasperstarter/lib/jasperstarter.jar -sSL https://repo.rocketx.top/docker/jasperstarter.jar \
-    && curl -o /usr/local/lib/python2.7/site-packages/pyreportjasper/jasperstarter/lib/chinesejasperfont.jar -sSL https://repo.rocketx.top/docker/chinesejasperfont.jar \
-    && curl -o /usr/local/lib/python2.7/site-packages/pyreportjasper/jasperstarter/bin/jasperstarter -sSL https://repo.rocketx.top/docker/jasperstarter \
-    && chmod 755 /usr/local/lib/python2.7/site-packages/pyreportjasper/jasperstarter/bin/jasperstarter 
+	&& rm -rf /var/lib/apt/lists/*
 
 EXPOSE 8069 8072
 
