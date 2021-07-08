@@ -1,5 +1,5 @@
 FROM python:3.7.3
-MAINTAINER liuye <ye.liu01@hand-china.com>
+LABEL maintainer="liuye <ye.liu01@hand-china.com"
 
 ENV LANG C.UTF-8
 
@@ -15,7 +15,7 @@ RUN set -x; \
 	&& apt update \
 	&& DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends \
         ca-certificates curl node-less python3-pip python3-setuptools python3-renderpm libssl1.0-dev xz-utils python3-watchdog unixodbc-dev \
-        postgresql-client default-jdk tree vim htop fontconfig fontconfig-config fonts-dejavu-core fonts-wqy-zenhei \
+        postgresql-server-dev-13 pgxnclient default-jdk tree vim htop fontconfig fontconfig-config fonts-dejavu-core fonts-wqy-zenhei \
         python3-dev python2.7-dev libldap2-dev libsasl2-dev slapd ldap-utils python-tox lcov valgrind libaio1 \
     && curl -o wkhtmltox.deb -sSL https://repo.rocketx.top/docker/wkhtmltox_0.12.5-1.stretch_amd64.deb \
     && echo '7e35a63f9db14f93ec7feeb0fce76b30c08f2057 wkhtmltox.deb' | sha1sum -c - \
@@ -64,6 +64,11 @@ ENV ORACLE_HOME /opt/oracle/instantclient_12_2
 RUN set -x; \
     groupadd -r odoo \
     && useradd -rm -g odoo odoo
+
+# install postgresql_anonymizer
+RUN set -x; \
+    pgxn install postgresql_anonymizer \
+    && ln -s /usr/lib/postgresql/13/bin/pg_dump_anon /usr/bin/pg_dump_anon
 
 # modify timezone
 RUN set -x; \
