@@ -60,6 +60,14 @@ RUN set -x; \
 # set oracle_home env
 ENV ORACLE_HOME /opt/oracle/instantclient_12_2
 
+# install libreoffice
+RUN set -x; \
+    apt update \
+    && apt install software-properties-common -y \
+    && add-apt-repository ppa:libreoffice/ppa -y \
+    && apt update \
+    && apt install -y libreoffice
+
 # create odoo group and user
 RUN set -x; \
     groupadd -r odoo \
